@@ -1,15 +1,5 @@
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
-import {
-  ArrowRight,
-  ShieldCheck,
-  ShoppingBag,
-  Sparkles,
-  TrendingUp,
-  Wallet,
-  Users,
-  Coins
-} from 'lucide-react'
 
 import { getSession } from '@/lib/auth'
 
@@ -26,246 +16,381 @@ export default async function HomePage() {
     redirect('/dashboard')
   }
 
+  const features = [
+    {
+      icon: '💎',
+      title: 'Smart Rewards',
+      text: 'Automatically reward customers based on total purchases and spending activity.'
+    },
+    {
+      icon: '📊',
+      title: 'Sales Analytics',
+      text: 'Track daily, weekly, monthly, and yearly grocery sales in real time.'
+    },
+    {
+      icon: '👥',
+      title: 'Customer Management',
+      text: 'Search customers, update spending, and manage reward history easily.'
+    },
+    {
+      icon: '⚡',
+      title: 'Fast & Modern',
+      text: 'Built using Next.js, Supabase, and Vercel for speed and reliability.'
+    }
+  ]
+
+  const stats = [
+    { value: 'Real-time', label: 'Sales Tracking' },
+    { value: 'Secure', label: 'Authentication' },
+    { value: 'Automatic', label: 'Points System' }
+  ]
+
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#070b17] text-white">
-      {/* Background */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-[-120px] top-[-120px] h-[380px] w-[380px] rounded-full bg-cyan-500/20 blur-3xl" />
-        <div className="absolute bottom-[-120px] right-[-120px] h-[380px] w-[380px] rounded-full bg-violet-500/20 blur-3xl" />
+    <main className="min-h-screen overflow-hidden bg-[#07111f] text-white">
+      {/* BACKGROUND */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute left-[-120px] top-[-120px] h-[400px] w-[400px] rounded-full bg-emerald-500/20 blur-3xl" />
+
+        <div className="absolute bottom-[-150px] right-[-100px] h-[400px] w-[400px] rounded-full bg-cyan-500/20 blur-3xl" />
+
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:70px_70px]" />
       </div>
 
-      <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-10 px-4 py-8 md:px-8">
-        {/* HERO */}
-        <section className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-          {/* Left */}
-          <div className="rounded-[32px] border border-white/10 bg-gradient-to-br from-cyan-500/10 via-slate-900 to-violet-500/10 p-8 shadow-2xl backdrop-blur-xl md:p-12">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-sm font-medium text-cyan-300">
-              <Sparkles size={16} />
-              Grocery Loyalty & Pointing System
+      {/* HEADER */}
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#07111f]/80 backdrop-blur-xl">
+        <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-4 md:px-8">
+          {/* LOGO */}
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-cyan-400 text-2xl shadow-lg shadow-emerald-500/30">
+              🛒
             </div>
 
-            <h1 className="max-w-3xl text-5xl font-black leading-tight tracking-tight md:text-6xl">
-              Ronald Store
-              <span className="block bg-gradient-to-r from-cyan-300 to-violet-300 bg-clip-text text-transparent">
-                Sulit Saya
+            <div>
+              <h1 className="text-lg font-black tracking-tight">
+                Ronald Store
+              </h1>
+
+              <p className="text-xs text-slate-400">
+                Sulit Saya Rewards
+              </p>
+            </div>
+          </div>
+
+          {/* NAV */}
+          <nav className="hidden items-center gap-8 lg:flex">
+            <a
+              href="#features"
+              className="text-sm text-slate-300 transition hover:text-white"
+            >
+              Features
+            </a>
+
+            <a
+              href="#dashboard"
+              className="text-sm text-slate-300 transition hover:text-white"
+            >
+              Dashboard
+            </a>
+
+            <a
+              href="#about"
+              className="text-sm text-slate-300 transition hover:text-white"
+            >
+              About
+            </a>
+          </nav>
+
+          {/* ACTIONS */}
+          <div className="flex items-center gap-3">
+            <Link
+              href="/sign-in"
+              className="hidden rounded-xl border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10 md:inline-flex"
+            >
+              Sign In
+            </Link>
+
+            <Link
+              href="/sign-up"
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-400 to-cyan-400 px-5 py-2.5 text-sm font-bold text-black transition hover:scale-[1.02]"
+            >
+              Get Started →
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      {/* HERO */}
+      <section className="relative">
+        <div className="mx-auto grid w-full max-w-7xl gap-20 px-4 py-24 md:px-8 lg:grid-cols-2 lg:items-center lg:py-32">
+          {/* LEFT */}
+          <div>
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-4 py-2 text-sm font-medium text-emerald-300">
+              ✨ Grocery Loyalty & Rewards Platform
+            </div>
+
+            <h1 className="max-w-3xl text-5xl font-black leading-[1.05] tracking-tight md:text-7xl">
+              Modern rewards
+              <span className="block bg-gradient-to-r from-emerald-300 to-cyan-300 bg-clip-text text-transparent">
+                for grocery stores
               </span>
             </h1>
 
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
-              A modern grocery rewards platform where admins can manage
-              customers, monitor sales analytics, configure reward rules, and
-              update spending using a dedicated customer management page.
+            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-slate-300 md:text-xl">
+              Manage customers, track grocery sales, automate reward points,
+              and grow customer loyalty with a clean and modern platform.
             </p>
 
-            {/* Features */}
-            <div className="mt-8 flex flex-wrap gap-3">
-              {[
-                'Custom points per peso',
-                'Admin analytics',
-                'Rewards management',
-                'Username-only login',
-                'Customer dashboard'
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200 backdrop-blur"
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-
-            {/* CTA */}
+            {/* BUTTONS */}
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Link
-                href="/sign-in"
-                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-cyan-400 px-6 py-4 font-bold text-black transition hover:scale-[1.02]"
+                href="/sign-up"
+                className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-emerald-400 to-cyan-400 px-8 py-4 text-lg font-bold text-black shadow-2xl shadow-emerald-500/20 transition hover:scale-[1.02]"
               >
-                Sign In
-                <ArrowRight size={18} />
+                Create Account →
               </Link>
 
               <Link
-                href="/sign-up"
-                className="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-6 py-4 font-semibold text-white transition hover:bg-white/10"
+                href="/sign-in"
+                className="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-8 py-4 text-lg font-semibold text-white backdrop-blur transition hover:bg-white/10"
               >
-                Create Account
+                Sign In
               </Link>
             </div>
-          </div>
 
-          {/* Right Auth Cards */}
-          <div className="flex flex-col gap-6">
-            {/* Sign In */}
-            <Link
-              href="/sign-in"
-              className="group rounded-3xl border border-white/10 bg-white/5 p-7 shadow-xl backdrop-blur-xl transition hover:border-cyan-400/40 hover:bg-cyan-400/5"
-            >
-              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-400/10 text-cyan-300">
-                <ShieldCheck size={28} />
-              </div>
-
-              <h2 className="text-2xl font-bold">Sign In</h2>
-
-              <p className="mt-3 leading-relaxed text-slate-400">
-                Login using your username and password. No email address
-                required.
-              </p>
-
-              <div className="mt-5 inline-flex items-center gap-2 font-semibold text-cyan-300">
-                Open Sign In
-                <ArrowRight
-                  size={16}
-                  className="transition group-hover:translate-x-1"
-                />
-              </div>
-            </Link>
-
-            {/* Sign Up */}
-            <Link
-              href="/sign-up"
-              className="group rounded-3xl border border-white/10 bg-white/5 p-7 shadow-xl backdrop-blur-xl transition hover:border-violet-400/40 hover:bg-violet-400/5"
-            >
-              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-400/10 text-violet-300">
-                <Users size={28} />
-              </div>
-
-              <h2 className="text-2xl font-bold">Create Account</h2>
-
-              <p className="mt-3 leading-relaxed text-slate-400">
-                The first account becomes the administrator. All next users
-                automatically become customers.
-              </p>
-
-              <div className="mt-5 inline-flex items-center gap-2 font-semibold text-violet-300">
-                Open Sign Up
-                <ArrowRight
-                  size={16}
-                  className="transition group-hover:translate-x-1"
-                />
-              </div>
-            </Link>
-          </div>
-        </section>
-
-        {/* FEATURES */}
-        <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
-            <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-400/10 text-cyan-300">
-              <Coins size={26} />
-            </div>
-
-            <h3 className="text-xl font-bold">Flexible Rewards</h3>
-
-            <p className="mt-3 leading-relaxed text-slate-400">
-              Configure custom points based on customer spending rules.
-            </p>
-          </div>
-
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
-            <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-400/10 text-violet-300">
-              <TrendingUp size={26} />
-            </div>
-
-            <h3 className="text-xl font-bold">Sales Analytics</h3>
-
-            <p className="mt-3 leading-relaxed text-slate-400">
-              Monitor daily, weekly, monthly, and yearly sales activity.
-            </p>
-          </div>
-
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
-            <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-400/10 text-emerald-300">
-              <ShoppingBag size={26} />
-            </div>
-
-            <h3 className="text-xl font-bold">Purchase Tracking</h3>
-
-            <p className="mt-3 leading-relaxed text-slate-400">
-              Automatically update customer spending and reward points.
-            </p>
-          </div>
-
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
-            <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-400/10 text-orange-300">
-              <Wallet size={26} />
-            </div>
-
-            <h3 className="text-xl font-bold">Customer Dashboard</h3>
-
-            <p className="mt-3 leading-relaxed text-slate-400">
-              Customers can track points, rewards, and purchase history.
-            </p>
-          </div>
-        </section>
-
-        {/* HOW IT WORKS */}
-        <section className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
-            <div className="mb-5 inline-flex rounded-2xl bg-cyan-400/10 p-4 text-cyan-300">
-              <Coins size={28} />
-            </div>
-
-            <h2 className="text-3xl font-black">
-              How the points system works
-            </h2>
-
-            <p className="mt-5 leading-relaxed text-slate-300">
-              Admins can configure custom reward rules like:
-            </p>
-
-            <div className="mt-6 space-y-4">
-              <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                <strong className="text-cyan-300">
-                  ₱100 spent = 1 point
-                </strong>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                <strong className="text-violet-300">
-                  ₱50 spent = 0.5 points
-                </strong>
-              </div>
-            </div>
-
-            <p className="mt-6 leading-relaxed text-slate-400">
-              Once purchases are entered, the system automatically computes and
-              adds reward points to the customer account.
-            </p>
-          </div>
-
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
-            <div className="mb-5 inline-flex rounded-2xl bg-violet-400/10 p-4 text-violet-300">
-              <ShieldCheck size={28} />
-            </div>
-
-            <h2 className="text-3xl font-black">Admin management tools</h2>
-
-            <div className="mt-6 space-y-4">
-              {[
-                'Customer lookup and management',
-                'Reward configuration',
-                'Purchase and spending updates',
-                'Analytics dashboard',
-                'Dedicated /admin/[username] page'
-              ].map((item) => (
+            {/* STATS */}
+            <div className="mt-14 grid grid-cols-3 gap-5">
+              {stats.map((stat) => (
                 <div
-                  key={item}
-                  className="flex items-center gap-3 rounded-2xl border border-white/10 bg-black/20 p-4"
+                  key={stat.label}
+                  className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur"
                 >
-                  <div className="h-2.5 w-2.5 rounded-full bg-violet-300" />
-                  <span className="text-slate-200">{item}</span>
+                  <h3 className="text-2xl font-black text-emerald-300">
+                    {stat.value}
+                  </h3>
+
+                  <p className="mt-1 text-sm text-slate-400">
+                    {stat.label}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
-        </section>
 
-        {/* Footer */}
-        <footer className="pb-6 pt-2 text-center text-sm text-slate-500">
-          Built with Next.js, Supabase, GitHub, and Vercel deployment.
-        </footer>
-      </div>
+          {/* RIGHT MOCKUP */}
+          <div
+            id="dashboard"
+            className="relative"
+          >
+            <div className="rounded-[32px] border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur-2xl">
+              {/* TOP */}
+              <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-emerald-400/20 to-cyan-400/20 p-6">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <p className="text-sm text-slate-300">
+                      Customer Points
+                    </p>
+
+                    <h2 className="mt-2 text-5xl font-black">
+                      1,250
+                    </h2>
+
+                    <p className="mt-3 text-sm text-emerald-200">
+                      +12% this month
+                    </p>
+                  </div>
+
+                  <div className="rounded-3xl bg-white/10 p-4 text-4xl">
+                    💎
+                  </div>
+                </div>
+
+                <div className="mt-8">
+                  <div className="mb-2 flex items-center justify-between text-sm">
+                    <span className="text-slate-300">
+                      Reward Progress
+                    </span>
+
+                    <span className="text-emerald-200">
+                      75%
+                    </span>
+                  </div>
+
+                  <div className="h-3 overflow-hidden rounded-full bg-white/10">
+                    <div className="h-full w-[75%] rounded-full bg-gradient-to-r from-emerald-400 to-cyan-400" />
+                  </div>
+                </div>
+              </div>
+
+              {/* CARDS */}
+              <div className="mt-6 grid gap-4">
+                <div className="rounded-3xl border border-white/10 bg-white/5 p-5 transition hover:bg-white/10">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-lg font-bold">
+                        ₱500 Purchase Added
+                      </h3>
+
+                      <p className="mt-1 text-sm text-slate-400">
+                        Customer spending updated automatically
+                      </p>
+                    </div>
+
+                    <span className="rounded-full bg-emerald-400/20 px-4 py-2 text-sm font-bold text-emerald-300">
+                      +5 pts
+                    </span>
+                  </div>
+                </div>
+
+                <div className="rounded-3xl border border-white/10 bg-white/5 p-5 transition hover:bg-white/10">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-lg font-bold">
+                        Monthly Analytics
+                      </h3>
+
+                      <p className="mt-1 text-sm text-slate-400">
+                        Grocery sales increased this month
+                      </p>
+                    </div>
+
+                    <span className="rounded-full bg-cyan-400/20 px-4 py-2 text-sm font-bold text-cyan-300">
+                      Live
+                    </span>
+                  </div>
+                </div>
+
+                <div className="rounded-3xl border border-white/10 bg-white/5 p-5 transition hover:bg-white/10">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-lg font-bold">
+                        Milk Tea Reward
+                      </h3>
+
+                      <p className="mt-1 text-sm text-slate-400">
+                        Customer reward available for redemption
+                      </p>
+                    </div>
+
+                    <span className="rounded-full bg-orange-400/20 px-4 py-2 text-sm font-bold text-orange-300">
+                      Ready
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* FLOATING */}
+            <div className="absolute -bottom-8 -left-8 hidden rounded-3xl border border-white/10 bg-white/10 p-5 shadow-2xl backdrop-blur-xl lg:block">
+              <div className="flex items-center gap-4">
+                <div className="rounded-2xl bg-emerald-400/20 p-4 text-3xl">
+                  📈
+                </div>
+
+                <div>
+                  <h4 className="font-black">
+                    Real-time Analytics
+                  </h4>
+
+                  <p className="text-sm text-slate-400">
+                    Daily • Weekly • Monthly
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURES */}
+      <section
+        id="features"
+        className="border-t border-white/10 bg-[#0b1728]"
+      >
+        <div className="mx-auto w-full max-w-7xl px-4 py-24 md:px-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="text-5xl font-black">
+              Everything your grocery store needs
+            </h2>
+
+            <p className="mt-6 text-lg leading-relaxed text-slate-400">
+              Built to improve customer loyalty, simplify reward management,
+              and modernize grocery store operations.
+            </p>
+          </div>
+
+          <div className="mt-20 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {features.map((feature) => (
+              <div
+                key={feature.title}
+                className="group rounded-[28px] border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:bg-white/10"
+              >
+                <div className="mb-6 text-5xl">
+                  {feature.icon}
+                </div>
+
+                <h3 className="text-2xl font-black">
+                  {feature.title}
+                </h3>
+
+                <p className="mt-4 leading-relaxed text-slate-400">
+                  {feature.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section
+        id="about"
+        className="mx-auto w-full max-w-7xl px-4 py-24 md:px-8"
+      >
+        <div className="overflow-hidden rounded-[40px] border border-white/10 bg-gradient-to-br from-emerald-400/20 to-cyan-400/20 p-10 backdrop-blur-xl md:p-16">
+          <div className="mx-auto max-w-4xl text-center">
+            <h2 className="text-5xl font-black leading-tight">
+              Start building customer loyalty today
+            </h2>
+
+            <p className="mt-6 text-xl leading-relaxed text-slate-300">
+              Create reward systems, monitor grocery sales, and manage customer
+              spending from a beautiful modern dashboard.
+            </p>
+
+            <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+              <Link
+                href="/sign-up"
+                className="inline-flex items-center justify-center rounded-2xl bg-white px-8 py-4 text-lg font-black text-black transition hover:scale-[1.02]"
+              >
+                Create Free Account
+              </Link>
+
+              <Link
+                href="/sign-in"
+                className="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/10 px-8 py-4 text-lg font-semibold text-white backdrop-blur transition hover:bg-white/20"
+              >
+                Open Dashboard
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="border-t border-white/10 bg-[#07111f]">
+        <div className="mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-5 px-4 py-10 text-center text-sm text-slate-500 md:flex-row md:px-8">
+          <p>
+            © 2026 Ronald Store Sulit Saya. All rights reserved.
+          </p>
+
+          <div className="flex items-center gap-5">
+            <span>Next.js</span>
+            <span>Supabase</span>
+            <span>GitHub</span>
+            <span>Vercel</span>
+          </div>
+        </div>
+      </footer>
     </main>
   )
 }
